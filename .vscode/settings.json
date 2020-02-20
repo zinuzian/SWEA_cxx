@@ -38,6 +38,7 @@
         "xutility": "cpp",
         "stack": "cpp",
         "queue": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "algorithm": "cpp"
     }
 }
