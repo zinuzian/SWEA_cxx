@@ -1,7 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cstring>
-#define ABS(x) (x>=0)? x:-x;
+
 using namespace std;
 int n;
 int answer=0;
@@ -14,7 +14,10 @@ void init(){
     for(int i=0;i<10;i++){
         perm[i] = i;
     }
-    answer = 0;
+    answer = 2147483647;
+}
+int abs(int x){
+    return x>0? x:-x;
 }
 void swap(int* a, int* b){
     int temp = *a;
@@ -25,7 +28,7 @@ void calcDist(){
     for(int i=0;i<n+1;i++){
         for(int j=i+1;j<n+2;j++){
         
-            dist[i][j] = ABS(xpos[i]-xpos[j]) + ABS(ypos[i]-ypos[j]);
+            dist[i][j] = abs(xpos[i]-xpos[j]) + abs(ypos[i]-ypos[j]);
             dist[j][i] = dist[i][j];
             
         }
@@ -36,10 +39,11 @@ void calculate(){
     int ret=0;
     for(int i=0;i<n-1;i++){
         ret += dist[perm[i]][perm[i+1]];
+        if (ret > answer) return;
     }
     ret += dist[perm[0]][n+1];
     ret += dist[perm[n-1]][n];
-    if(ret > answer){
+    if(ret < answer){
         answer = ret;
     }
 }
@@ -52,7 +56,7 @@ void permutation(int nth){
         // cout << endl;
         calculate();
     }else{
-        for(int i=0;i<nth-1;i++){
+        for(int i=0;i<nth;i++){
             swap(&perm[i], &perm[nth-1]);
             permutation(nth-1);
             swap(&perm[i], &perm[nth-1]);

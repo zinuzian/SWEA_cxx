@@ -2,3 +2,4 @@
 *.txt
 acmicpc/*.exe
 acmicpc/*.txt
+.vscode/*
