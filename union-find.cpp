@@ -11,24 +11,25 @@ void make_set(int x){
     parent[x] = x;
     Rank[x] = 0;
 }
+
 int find_set(int x){
     if(x != parent[x]) parent[x] = find_set(parent[x]);
     return parent[x];
 }
 
-void link(int x, int y){
-    if(Rank[x] > Rank[y]){
-        parent[y] = x;
+void Union(int x, int y){
+    int px = find_set(x);
+    int py = find_set(y);
+
+    if(Rank[px] > Rank[py]){
+        parent[py] = x;
     }else{
-        parent[x] = y;
-        if(Rank[x] == Rank[y]){
-            Rank[y]++;
+        parent[px] = y;
+        if(Rank[px] == Rank[py]){
+            Rank[py]++;
         }
     }
-}
 
-void Union(int x, int y){
-    link(find_set(x),find_set(y));
 }
 
 void print_p(){
